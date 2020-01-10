@@ -16,3 +16,9 @@ Route::get('/', function () {
 Route::get('/test/pay','TestController@alipay');        //去支付
 Route::get('/test/alipay/return','Alipay\PayController@aliReturn');
 Route::post('/test/alipay/notify','Alipay\PayController@notify');
+
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+//签名测试
+Route::get('/sign1','TestController@sign1');
