@@ -163,7 +163,7 @@ public function fs(){
         }
         public function md5test(){
             //发送的数据
-            $data='yangkai';
+            $data='tyz';
     
             $key='1905';
             //计算签名
