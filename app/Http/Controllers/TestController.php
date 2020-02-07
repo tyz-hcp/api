@@ -139,4 +139,26 @@ public function sign1()
         echo "验签失败";
     }
 }
-} 
+//防刷 
+public function fs(){
+    //        dd($_SERVER);
+            $redis_key=md5($_SERVER['HTTP_TOKEN'].$_SERVER['REQUEST_URI']);
+            $time=10;
+            Redis::incr($redis_key);
+            $number=Redis::get($redis_key);
+    //        echo $redis_key;
+            if($number>5){
+                $times=Redis::ttl($redis_key);
+                if($times==-1){
+                    Redis::expire($redis_key,$time);
+                    echo '超过次数限制,请'.$time.'秒后重试';
+                }else{
+                    echo '超过次数限制,请'.$times.'秒后重试';
+                }
+    
+            }else{
+                echo '当前访问次数:'.$number;
+            }
+    
+        }
+}
