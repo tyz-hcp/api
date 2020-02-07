@@ -161,4 +161,18 @@ public function fs(){
             }
     
         }
+        public function md5test(){
+            //发送的数据
+            $data='yangkai';
+    
+            $key='1905';
+            //计算签名
+            $signature=md5($data.$key);
+            echo "发送端的签名：".$signature;echo '</br>';
+    
+            //发送数据
+            $url='http://passport.1905.com/test/checksign?data='.$data.'&signature='.$signature;
+            $response=file_get_contents($url);
+            echo $response;
+        }
 }
